@@ -248,6 +248,14 @@
     <extension name='merchandisingsmartedit' />
     <extension name='merchandisingstorefrontsampledataaddon' />
 
+      <!-- Custom Add on -->
+
+    <!-- <extension name='daaddon' />-->
+	<extension name='dacustom' />
+	<extension name='dastorefront' />
+	<extension name='dastore' />
+
+
 <!-- Added SAP CPI Extensions 
 
     <extension name='sapcpiadapter' /> 

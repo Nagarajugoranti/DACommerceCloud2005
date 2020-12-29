@@ -35,7 +35,7 @@ else {
     // commenting these as context needs to be from backend     
         //currency: ['USD'],
         //language: ['en'],
-        //baseSite: ['electronics-spa']
+        baseSite: ['electronics-spa','apparel-uk-spa' ]
       },
       i18n: {
         resources: translations,

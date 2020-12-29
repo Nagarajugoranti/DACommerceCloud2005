@@ -1,0 +1,38 @@
+.branding-mobile {
+  background-color: #ffffff;
+}
+
+#quoteFormDiv {
+  background: #ffffff;
+}
+
+header {
+  background: #ffffff;
+}
+.breadcrumb {
+  background-color: #ffffff;
+}
+.breadcrumb-section{
+	background-color: #ffffff;	
+	}
+@media (min-width: 992px) {
+	.globalWork-Margin {
+		padding-top: 0px;
+		padding-right: 40px;
+		padding-bottom: 0px;
+		padding-left: 40px;
+	}
+
+	.breadcrumb {
+		padding-left: 10px;
+	}
+}
+.tabs .tabbody {
+	background-color: #ffffff;
+	}
+ @media (min-width: 1024px) {
+.custom_owl{
+	width: 450px!important;
+}
+} 
+	

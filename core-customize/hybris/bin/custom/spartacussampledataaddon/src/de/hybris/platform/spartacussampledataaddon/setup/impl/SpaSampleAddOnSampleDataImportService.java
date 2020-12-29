@@ -35,7 +35,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 	@Override
 	protected void importContentCatalog(final SystemSetupContext context, final String importRoot, final String catalogName)
 	{
-		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
+		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk") || catalogName.equals("electronicsda"))
 		{
 			// 1- create new catalog
 			importImpexFile(context, importRoot + "/contentCatalogs/" + catalogName + "ContentCatalog/catalog.impex", false);
@@ -47,7 +47,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 			{
 				SyncItemJobModel job = synItemsJobs.get(0);
 				final SyncItemJob jobItem = getModelService().getSource(job);
-				synchronizeSpaContentCatalog(context, jobItem);
+				synchronizeSpaContentCatalog(context, jobItem, catalogName);
 			}
 
 			// 3- perform some cleaning
@@ -60,7 +60,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 		// 4- import content catalog from impex
 		super.importContentCatalog(context, importRoot, catalogName);
 
-		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
+		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk") || catalogName.equals("electronicsda"))
 		{
 			// 5- synchronize spaContentCatalog:staged->online
 			synchronizeContentCatalog(context, catalogName + "-spa", true);
@@ -81,9 +81,9 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 	}
 
 
-	private void synchronizeSpaContentCatalog(final SystemSetupContext context, final SyncItemJob syncJobItem)
+	private void synchronizeSpaContentCatalog(final SystemSetupContext context, final SyncItemJob syncJobItem, final String catalogName)
 	{
-		logInfo(context, "Begin synchronizing Content Catalog [" + SYNC_CONTENT_CATALOG + "] - synchronizing");
+		logInfo(context, "Begin synchronizing Content Catalog [" + catalogName + "->spa" + "] - synchronizing");
 
 		final SyncItemCronJob syncCronJob = syncJobItem.newExecution();
 		syncCronJob.setLogToDatabase(false);
@@ -94,17 +94,17 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 		logInfo(context, "Starting synchronization, this may take a while ...");
 		syncJobItem.perform(syncCronJob, true);
 
-		logInfo(context, "Synchronization complete for catalog [" + SYNC_CONTENT_CATALOG + "]");
+		logInfo(context, "Synchronization complete for catalog [" + catalogName + "->spa" + "]");
 		final CronJobResult result = modelService.get(syncCronJob.getResult());
 		final CronJobStatus status = modelService.get(syncCronJob.getStatus());
 
 		final PerformResult syncCronJobResult = new PerformResult(result, status);
 		if (isSyncRerunNeeded(syncCronJobResult))
 		{
-			logInfo(context, "Catalog catalog [" + SYNC_CONTENT_CATALOG + "] sync has issues.");
+			logInfo(context, "Catalog catalog [" + catalogName + "->spa" +  "] sync has issues.");
 		}
 
-		logInfo(context, "Done synchronizing  Content Catalog [" + SYNC_CONTENT_CATALOG + "]");
+		logInfo(context, "Done synchronizing  Content Catalog [" + catalogName + "->spa" +  "]");
 	}
 
 	protected ModelService getModelService()
