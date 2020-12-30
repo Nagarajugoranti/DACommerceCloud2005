@@ -6,6 +6,7 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
 <c:set var="productName" value="${fn:escapeXml(product.name)}" />
 
+<!-- TEST COMMENT -->
 {"quickOrderErrorData": [
 <c:forEach items="${quickOrderErrorData}" var="quickOrderEntry" varStatus="status">
 	<c:set var="productCode" value="${fn:escapeXml(quickOrderEntry.productData.code)}" />
